@@ -24,7 +24,6 @@ export default function CompaniesPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
-  // Auto-generate English name from Arabic
   const generateEnglishName = (arabicName: string): string => {
     const arabicMap: Record<string, string> = {
       'أ': 'a', 'ا': 'a', 'إ': 'i', 'آ': 'a',
@@ -91,14 +90,12 @@ export default function CompaniesPage() {
     setIsModalOpen(true);
   };
 
-  // Filter companies based on search
   const filteredCompanies = companies.filter(company =>
     company.nameAr.toLowerCase().includes(searchQuery.toLowerCase()) ||
     company.nameEn.toLowerCase().includes(searchQuery.toLowerCase()) ||
     company.code.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  // Pagination
   const totalPages = Math.ceil(filteredCompanies.length / itemsPerPage);
   const paginatedCompanies = filteredCompanies.slice(
     (currentPage - 1) * itemsPerPage,
@@ -107,7 +104,6 @@ export default function CompaniesPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 p-6" dir="rtl">
-      {/* Header */}
       <div className="mb-8">
         <div className="flex items-center gap-3 mb-2">
           <div className="p-3 bg-blue-600 rounded-xl shadow-lg">
@@ -120,7 +116,6 @@ export default function CompaniesPage() {
         </div>
       </div>
 
-      {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <div className="bg-white rounded-2xl shadow-md p-6 border border-gray-100">
           <div className="flex items-center justify-between">
@@ -157,10 +152,8 @@ export default function CompaniesPage() {
         </div>
       </div>
 
-      {/* Actions Bar */}
       <div className="bg-white rounded-2xl shadow-md p-6 mb-6 border border-gray-100">
         <div className="flex flex-col md:flex-row gap-4 justify-between">
-          {/* Search */}
           <div className="relative flex-1 max-w-md">
             <Search className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
             <input
@@ -175,7 +168,6 @@ export default function CompaniesPage() {
             />
           </div>
 
-          {/* Add Button */}
           <button
             onClick={openAddModal}
             className="flex items-center gap-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-3 rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg hover:shadow-xl"
@@ -186,7 +178,6 @@ export default function CompaniesPage() {
         </div>
       </div>
 
-      {/* Table */}
       <div className="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100">
         <div className="overflow-x-auto">
           <table className="w-full">
@@ -242,7 +233,6 @@ export default function CompaniesPage() {
           </table>
         </div>
 
-        {/* Pagination */}
         {totalPages > 1 && (
           <div className="flex items-center justify-between px-6 py-4 bg-gray-50 border-t border-gray-100">
             <p className="text-sm text-gray-600">
@@ -281,7 +271,6 @@ export default function CompaniesPage() {
         )}
       </div>
 
-      {/* Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4" onClick={() => setIsModalOpen(false)}>
           <div className="bg-white rounded-3xl shadow-2xl w-full max-w-lg overflow-hidden" onClick={e => e.stopPropagation()}>
